@@ -1,33 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Funda Of Web IT</title>
+    <title>Army Database</title>
 </head>
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h4>How to make Search box & filter data in HTML Table from Database in PHP MySQL </h4>
+                        <h4>Search The Army Details Here</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-7">
-
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
+                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])) { echo $_GET['search']; } ?>" class="form-control" placeholder="Search data">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -40,32 +35,48 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Dept_ID</th>
+                                    <th>Designation</th>
+                                    <th>Posting (States)</th>
+                                    <th>Age</th>
+                                    <th>Salary (per annum)</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $con = mysqli_connect("localhost","root","","phptutorials");
+                                    $con = mysqli_connect("localhost", "root", "", "armydatabase");
+
+                                    if(mysqli_connect_errno()) {
+                                        die("Database connection failed: " . mysqli_connect_error());
+                                    }
 
                                     if(isset($_GET['search']))
                                     {
                                         $filtervalues = $_GET['search'];
-                                        $query = "SELECT * FROM users WHERE CONCAT(firstname,lastname,email) LIKE '%$filtervalues%' ";
+                                        $query = "SELECT * FROM armydatabase WHERE CONCAT(Name, Department, Dept_ID, Designation, Posting_States, Age, Salaryper_annum) LIKE '%$filtervalues%' ";
                                         $query_run = mysqli_query($con, $query);
+
+                                        if(!$query_run) {
+                                            die("Query execution failed: " . mysqli_error($con));
+                                        }
 
                                         if(mysqli_num_rows($query_run) > 0)
                                         {
-                                            foreach($query_run as $items)
+                                            while($items = mysqli_fetch_assoc($query_run))
                                             {
                                                 ?>
                                                 <tr>
-                                                    <td><?= $items['id']; ?></td>
-                                                    <td><?= $items['firstname']; ?></td>
-                                                    <td><?= $items['lastname']; ?></td>
-                                                    <td><?= $items['email']; ?></td>
+                                                    <td><?= $items['Name']; ?></td>
+                                                    <td><?= $items['Department']; ?></td>
+                                                    <td><?= $items['Dept_ID']; ?></td>
+                                                    <td><?= $items['Designation']; ?></td>
+                                                    <td><?= $items['Posting_States']; ?></td>
+                                                    
+                                                    <td><?= $items['Age']; ?></td>
+                                                    <td><?= $items['Salaryper_annum']; ?></td>
                                                 </tr>
                                                 <?php
                                             }
@@ -74,7 +85,7 @@
                                         {
                                             ?>
                                                 <tr>
-                                                    <td colspan="4">No Record Found</td>
+                                                    <td colspan="10">No Record Found</td>
                                                 </tr>
                                             <?php
                                         }
