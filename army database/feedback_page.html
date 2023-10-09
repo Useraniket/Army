@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Feedback</title>
+	<link rel="stylesheet" type="text/css" href="feedback_page_style.css">
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+	<div class="navbar">
+        <a href="index.html"><img src="https://images-workbench.99static.com/omY4yWNTvkBhpYEgtz98cP0OuM0=/99designs-contests-attachments/54/54750/attachment_54750986" alt="LOGO" class="nav-image" title="Operation Army Database"></a>
+        <p class="nav-logo">Operation Army Database</p>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="team.html">TEAM</a>
+            <a href="feedback_page.html">FEEDBACK</a>
+            <a href="contact_page.html">CONTACT US</a>
+            <div class="sign-button"><a href="index.php"><h3>Search</h3></a></div>
+        </div>
+    </div>
+
+	<div id="feedback-box">
+		<h1>FEEDBACK FORM</h1>
+		<form>
+			<div class="form-units">
+				<label for="name">Name:</label>
+				<br>
+				<input id="name" type="text" name="name" id="name" placeholder="Enter Name" required>
+			</div>
+			<div class="form-units">
+				<label for="email">Email:</label>
+				<br>
+				<input id="email" type="email" name="email" id="email" placeholder="Enter email" required>
+			</div>
+			<div class="form-units">
+				<label for="message">Message:</label>
+				<br>
+				<textarea id="message" placeholder="Enter Message"></textarea>
+			</div>
+				<input id="button" type="submit" name="submit" id="submit-button">
+		</form>
+	</div>
+
+	<!-- footer starts -->
+    <div class="footer-box">
+        <div class="flex-container">
+            <div class="flex-item footer-description-section">
+                <div>
+                    <img src="https://images-workbench.99static.com/omY4yWNTvkBhpYEgtz98cP0OuM0=/99designs-contests-attachments/54/54750/attachment_54750986">
+                </div>
+                <div class="footer-description">
+                    <p>Indian Armed Forces are one of the best forces in
+                        the world.They work day and night for our safety and 
+                        peace without thinking of their own safety.
+                    </p>
+                </div>
+            </div>
+            <div class="flex-item team-section">
+                <div>
+                    <h2><a href="team.html">TEAM</a></h2>
+                </div>
+                <div>
+                    <ul class="team-member-name">
+                        <li>Aniket</li>
+                        <li>Souvik</li>
+                </div>
+            </div>
+            <div class="flex-item links-section">
+                <div>
+                    <h2>LINKS</h2>
+                </div>
+                <div>
+                    <ul class="links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="feedback_page.html">Feedback</a></li>
+                        <li><a href="contact_page.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+                <div class="social-icons">
+                    <img src="facebook.png">
+                    <img src="twitter.png">
+                    <img src="instagram.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer ends -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+       const submitButton = document.getElementById("button");
+
+submitButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+  const name = document.getElementById("name")
+  const email = document.getElementById("email")
+  const message = document.getElementById("message")
+  const SecureToken = "23398e84-f8bc-41a0-8a40-19b2c4b6c42d"; // Replace with your actual SecureToken
+
+  try {
+    const EMAIL=await Email.send({
+      SecureToken: SecureToken,
+      To: email.value,
+      From: 'aniketpaul692@gmail.com',
+      Subject: "Confirmation Mail",
+      Body: `Thank you, ${name.value}, for connecting with us. We will get back to you soon.\n\nMessage: ${message.value}`
+    });
+    console.log(EMAIL);
+
+    alert("Email sent successfully!");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    alert("An error occurred while sending the email.");
+
+  }
+  finally{
+    name.value='';
+    email.value='';
+    message.value='';
+    
+  }
+});
+    </script>
+    
+    
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>

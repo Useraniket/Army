@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contact_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html"><img src="https://images-workbench.99static.com/omY4yWNTvkBhpYEgtz98cP0OuM0=/99designs-contests-attachments/54/54750/attachment_54750986" alt="LOGO" class="nav-image" title="Operation Army Database"></a>
+        <p class="nav-logo">Operation Army Database</p>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="team.html">TEAM</a>
+            <a href="feedback_page.html">FEEDBACK</a>
+            <a href="contact_page.html">CONTACT US</a>
+            <div class="sign-button"><a href="index.php"><h3>Search</h3></a></div>
+        </div>
+    </div>
+    <div class="Contact-section">
+        <div class="Contact-info">
+            <div><i class="fas fa-map-marker-alt"></i>Institute of Engineering and Management,Kolkata,India</div><br>
+            <div><i class="fas fa-envelope"></i>operationarmydatabase@gmail.com</div><br>
+            <div><i class="fas fa-phone"></i>6457893456</div><br>
+            <div><i class="fas fa-clock"></i>Mon - Fri (11:00 AM to 9:00 PM)</div><br>
+        </div>
+        <div class="Contact-form">
+            <h2>Contact Us</h2>
+            <form class="contact" action="" method="post">
+                <input id="name" type="text" name="name" class="text-box" placeholder="Your Name" required><br><br>
+                <input id="email" type="email" name="email" class="text-box" placeholder="Your Email" required><br><br>
+                <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                <input id="button" type="Submit" name="Submit" class="send-btn" value="Submit">
+            </form>
+        </div>
+    </div>
+    <!-- footer starts -->
+    <div class="footer-box">
+        <div class="flex-container">
+            <div class="flex-item footer-description-section">
+                <div>
+                    <img src="https://images-workbench.99static.com/omY4yWNTvkBhpYEgtz98cP0OuM0=/99designs-contests-attachments/54/54750/attachment_54750986">
+                </div>
+                <div class="footer-description">
+                    <p>Indian Armed Forces are one of the best forces in
+                       the world.They work day and night for our safety and 
+                        peace without thinking of their own safety.
+                    </p>
+                </div>
+            </div>
+            <div class="flex-item team-section">
+                <div>
+                    <h2><a href="team.html">TEAM</a></h2>
+                </div>
+                <div>
+                    <ul class="team-member-name">
+                        <li>Aniket</li>
+                        <li>Souvik</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex-item links-section">
+                <div>
+                    <h2>LINKS</h2>
+                </div>
+                <div>
+                    <ul class="links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="feedback_page.html">Feedback</a></li>
+                        <li><a href="contact_page.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-icons">
+                    <img src="facebook.png">
+                    <img src="twitter.png">
+                    <img src="instagram.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer ends -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+       const submitButton = document.getElementById("button");
+
+submitButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+  const name = document.getElementById("name")
+  const email = document.getElementById("email")
+  const message = document.getElementById("message")
+  const SecureToken = "23398e84-f8bc-41a0-8a40-19b2c4b6c42d"; // Replace with your actual SecureToken
+
+  try {
+    const EMAIL=await Email.send({
+      SecureToken: SecureToken,
+      To: email.value,
+      From: 'aniketpaul692@gmail.com',
+      Subject: "Confirmation Mail",
+      Body: `Thank you, ${name.value}, for connecting with us. We will get back to you soon.\n\nMessage: ${message.value}`
+    });
+    console.log(EMAIL);
+
+    alert("Email sent successfully!");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    alert("An error occurred while sending the email.");
+
+  }
+  finally{
+    name.value='';
+    email.value='';
+    message.value='';
+    
+  }
+});
+    </script>
+    
+    
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>
